@@ -36,3 +36,6 @@
 
 /* bypnrelated-1.0.0 (Related pages: no lonely last card: 2 or 4 links fill rows on desktop, odd last link spans on tablet) */
 !function(){var g='.sp-related',k='.sp-rellink',i=g+' '+k,s=document.createElement('style');s.textContent='@media (min-width:992px){'+g+'{grid-template-columns:repeat(6,minmax(0,1fr))}'+i+'{grid-column:span 2}'+i+':first-child:nth-last-child(2),'+i+':first-child:nth-last-child(2)~'+k+','+i+':nth-child(3n+1):nth-last-child(4),'+i+':nth-child(3n+1):nth-last-child(4)~'+k+'{grid-column:span 3}}@media (min-width:480px) and (max-width:991px){'+i+':last-child:nth-child(odd){grid-column:1/-1}}';document.head.appendChild(s)}();
+
+/* bypnfwi-1.0.0 (Full-width image: Focus point sets which part of the photo stays in view; Card on right) */
+!function(){var d=document,s=d.createElement('style');s.textContent='@media (min-width:768px){.sp-fwi[data-card-right=true i] .sp-fwi-inner{justify-content:flex-end}}';d.head.appendChild(s);function init(){d.querySelectorAll('.sp-fwi-img[data-focus]').forEach(function(i){var v=(i.getAttribute('data-focus')||'').trim().toLowerCase().replace(/\s+/g,' ').replace(/centre/g,'center');if(v&&window.CSS&&CSS.supports('object-position',v))i.style.objectPosition=v})}d.readyState=='loading'?d.addEventListener('DOMContentLoaded',init):init()}();

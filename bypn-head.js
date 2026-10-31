@@ -33,3 +33,6 @@
 
 /* bypncta-1.0.0 (CTA cards: odd last card spans full width; hide empty optional header) */
 !function(){var d=document,s=d.createElement('style');s.textContent='.sp-cta-grid>.sp-slot>:last-child:nth-child(odd){grid-column:1/-1}.sp-cta-grid>:last-child:nth-child(odd):not(.sp-slot){grid-column:1/-1}.sp-cards-head:empty{display:none}';d.head.appendChild(s)}();
+
+/* bypnrelated-1.0.0 (Related pages: no lonely last card: 2 or 4 links fill rows on desktop, odd last link spans on tablet) */
+!function(){var g='.sp-related',k='.sp-rellink',i=g+' '+k,s=document.createElement('style');s.textContent='@media (min-width:992px){'+g+'{grid-template-columns:repeat(6,minmax(0,1fr))}'+i+'{grid-column:span 2}'+i+':first-child:nth-last-child(2),'+i+':first-child:nth-last-child(2)~'+k+','+i+':nth-child(3n+1):nth-last-child(4),'+i+':nth-child(3n+1):nth-last-child(4)~'+k+'{grid-column:span 3}}@media (min-width:480px) and (max-width:991px){'+i+':last-child:nth-child(odd){grid-column:1/-1}}';document.head.appendChild(s)}();

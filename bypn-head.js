@@ -39,3 +39,6 @@
 
 /* bypnfwi-1.0.1 (Full-width image: Focus point sets which part of the photo stays in view; Card on right) */
 !function(){var d=document,s=d.createElement('style');s.textContent='@media (min-width:992px){.sp-fwi[data-card-right=true i] .sp-fwi-inner{justify-content:flex-end}}';d.head.appendChild(s);function init(){d.querySelectorAll('.sp-fwi-img[data-focus]').forEach(function(i){var v=(i.getAttribute('data-focus')||'').trim().toLowerCase().replace(/\s+/g,' ').replace(/centre/g,'center');if(v&&window.CSS&&CSS.supports('object-position',v))i.style.objectPosition=v})}d.readyState=='loading'?d.addEventListener('DOMContentLoaded',init):init()}();
+
+/* bypnvideo-1.0.0 (Video: vertical 9:16 option) */
+!function(){var s=document.createElement('style');s.textContent='[data-vertical=true i] .sp-vid{max-width:420px;margin-left:auto;margin-right:auto;width:100%}[data-vertical=true i] .sp-vid .sp-media-video{aspect-ratio:9/16}';document.head.appendChild(s)}();

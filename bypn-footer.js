@@ -65,3 +65,20 @@ function slug(t){return t.toLowerCase().replace(/[‘’']/g,'').replace(/[^a-z0
 /* bypncdnrefresh-1.0.0.js */
 /* Clears old saved copies of redirected CDN files in visitors' browsers. Loads the refresh script that the media-bypn Worker serves at cdn.backyoungpeoplenow.com/_refresh.js. */
 (function(){var s=document.createElement('script');s.src='https://cdn.backyoungpeoplenow.com/_refresh.js';s.async=true;document.body.appendChild(s)})();
+
+/* bypna11y-1.0.0 (Accessibility fixes, Nov 2026, measured against WCAG 2.2 AA and HSBC's digital accessibility guidance:
+   1. Homepage hero: the rotating word no longer announces itself to screen readers every 2.4 seconds. Screen readers hear one steady headline, "Back young people now".
+   2. Reduce motion: turning it on from the menu also pauses the hero word and marquee straight away (and turning it off plays them again), so the hero's pause button always matches.
+   3. Placard maker: the word box gets a name screen readers can read out.
+   4. External links whose text is filled in later (e.g. social links from the CMS nav data) get their new-tab icon and "(opens in a new tab)" back.) */
+(function(){var d=document;
+function hero(){var w=d.getElementById('hm-word');if(!w||w.dataset.a11y)return;w.dataset.a11y='1';var h=w.closest('h1,h2');
+ w.removeAttribute('aria-live');w.setAttribute('aria-hidden','true');
+ if(h&&!h.querySelector('.bypn-sr-word')){var s=d.createElement('span');s.className='bypn-sr-word';s.style.cssText='position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap';s.textContent=' young people ';h.insertBefore(s,w)}}
+function input(){var i=d.getElementById('hm-pl-input');if(i&&!i.getAttribute('aria-label')&&!(i.labels&&i.labels.length))i.setAttribute('aria-label','Your word for the placard')}
+d.addEventListener('bypn:motion',function(e){var p=d.getElementById('hm-pause');if(!p)return;var playing=/pause/i.test(p.getAttribute('aria-label')||'');if(e.detail&&e.detail.calm===playing)p.click()});
+var ICON='<svg class="ext-ico" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M4.5 1.5h6v6M10.5 1.5 1.5 10.5"/></svg>';
+function relink(a){if(!a.dataset||!a.dataset.extDone||a.querySelector('.ext-sr'))return;if((a.textContent||'').trim()&&!a.querySelector('.ext-ico'))a.insertAdjacentHTML('beforeend',ICON);var sr=d.createElement('span');sr.className='ext-sr';sr.textContent=' (opens in a new tab)';a.appendChild(sr)}
+function links(){[].forEach.call(d.querySelectorAll('a[data-ext-done]'),relink)}
+function run(){hero();input();links();new MutationObserver(function(ms){ms.forEach(function(m){var t=m.target,a=t&&(t.nodeType===1?t:t.parentElement);a=a&&a.closest&&a.closest('a[data-ext-done]');if(a)relink(a)});links()}).observe(d.body,{childList:true,subtree:true,characterData:true})}
+d.readyState==='loading'?d.addEventListener('DOMContentLoaded',run):setTimeout(run,0)})();
